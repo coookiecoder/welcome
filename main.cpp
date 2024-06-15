@@ -3,34 +3,27 @@
 #include <string>
 
 void git_clone(std::string line) {
-	std::string repo;
-	std::string folder_name;
 	std::string command;
 
-	int cursor = 0;
-
-	while (line[cursor] != ' ') {
-		repo += line[cursor++];
-	}
-
-	cursor++;
-
-	while (line[cursor]) {
-		folder_name += line[cursor++];
-	}
-
-	command = "git clone http://github.com/coookiecoder/" + repo + " " + folder_name;
+	command = "git clone http://github.com/coookiecoder/" + line;
 
 	system(command.c_str());
 }
 
 void purge_folder(std::string line) {
-	std::string folder;
 	std::string command;
-
-	command = "rm -rf " + folder;
+	
+	command = "rm -rf " + line;
 
 	system(command.c_str());
+}
+
+void web_get(std::string line) {
+	std::string command;
+	
+	command = "wget " + line;
+
+	system(command.c_str());	
 }
 
 void do_instruction(std::string instruction) {
@@ -44,6 +37,10 @@ void do_instruction(std::string instruction) {
 		git_clone(instruction.c_str() + 6);
 	else if (first_bloc == "purge")
 		purge_folder(instruction.c_str() + 6);
+	else if (first_bloc == "web get")
+		web_get(instruction.c_str() + 7);
+	else if (first_bloc == "custom")
+		system(instruction.c_str() + 7);
 }
 
 int main(void) {
