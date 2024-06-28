@@ -5,7 +5,7 @@
 void git_clone(std::string line) {
 	std::string command;
 
-	command = "git clone http://github.com/coookiecoder/" + line;
+	command = "git clone git@github.com:coookiecoder/" + line;
 
 	system(command.c_str());
 }
